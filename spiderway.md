@@ -1,4 +1,4 @@
-# coding:utf-8
+
 ### 多种方式抓取HTML
 
 #### requests  get请求:      
