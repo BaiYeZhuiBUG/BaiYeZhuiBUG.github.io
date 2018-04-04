@@ -120,11 +120,7 @@
                return
     
            #获取代理
-           # response = requests.get('http://proxyapi_t.meihua.info/proxy?media_url=www.so.com&source=News')
-           # l_json = json.loads(response)
-           # data = l_json['data']
-           # httpProxy = '%s:%s'%(data['proxy_ip'], data['proxy_port'])
-           httpProxy = '112.124.37.141:31280'
+           httpProxy = '112.124.37.13:31280'
            html = ''
            #非异步加载
            if not classname and not id and not name:
@@ -206,10 +202,8 @@
             # self.redis2 = RedisHelper()
     
         def print_percent(self, percent):
-            print 'load percent: %s; result: %s;  page: %s  time: %s'%(percent,page_flag and (datetime.now()-load_time).seconds > 2, page_flag, (datetime.now()-load_time).seconds)
             if page_flag and (datetime.now()-load_time).seconds > 2:
                 self.stop()
-                print 'stop...'
     
         def _result_availiable(self):
             global gl_status, x_size, proxy_flag, page_flag, load_time
@@ -247,7 +241,6 @@
             start_time = datetime.now()
             spider = WechatNewSpider()
             spider.crawlNews(dom)
-            print '----------保存新闻耗时：%s----------------------------------------'%(datetime.now()-start_time)
     
     
         def auto_click(self):
@@ -299,8 +292,6 @@
                     sleep(300)
                 else:
                     break
-                # url =  'http://weixin.sogou.com/weixin?type=2&s_from=input&query=海盛上寿&ie=utf8&_sug_=n&_sug_type_='
-                # break
             proxy = Proxy()
             proxy.setAppProxy()
             # proxy.clearAppProxy()
@@ -350,18 +341,14 @@
                         sleep(300)
                         continue
                     else:
-                        # redis.lpush('wechat:url_backups140',url)
                         return url
-                        # return 'http://weixin.sogou.com/weixin?type=2&s_from=input&query=海盛上寿&ie=utf8&_sug_=n&_sug_type_='
                 except Exception as err:
                     print 'get_url error : %s'%err
                     pass
     
     class Proxy(object):
         def setAppProxy(self):
-            # host_list = ['121.199.20.133','112.124.40.66','121.199.20.218','121.199.20.223','112.124.37.141','121.199.20.202','121.199.42.46','121.199.20.192','121.199.20.22','121.199.20.174','112.124.40.25','115.29.170.244','114.215.192.86','121.41.13.99','120.26.71.220','121.199.20.133','112.124.40.66','121.199.20.218','121.199.20.223','112.124.37.141','121.199.42.46','121.199.20.202','112.124.40.27','112.124.40.36','121.199.20.203']
-            host_list = ['121.199.20.223:31280','121.199.20.205:31280','121.199.20.174:31280',0,0,0,0,0,0,'121.199.20.22:31280','121.199.20.218:31280','121.199.20.203:31280','121.199.20.192:31280','121.199.42.46:31280','121.199.20.202:31280','121.199.20.133:31280','120.55.81.241:31280','121.41.21.209:31280','121.41.8.43:31280','120.26.50.163:31280','121.41.8.142:31280','120.26.50.228:31280','120.26.50.32:31280','120.26.50.205:31280','120.26.50.247:31280','120.26.206.33:31280','123.56.82.74:31280','123.56.168.24:31280','123.56.167.163:31280','123.56.92.90:31280','101.200.133.83:31280','123.57.44.152:31280','123.57.59.65:31280','101.200.151.3:31280','101.200.152.124:31280','101.200.130.41:31280','112.124.40.65:31280','112.124.40.66:31280','112.124.40.60:31280','112.124.40.56:31280','112.124.40.62:31280','112.124.40.36:31280','112.124.40.27:31280','112.124.40.25:31280','112.124.40.63:31280','112.124.37.140:31280']
-            # host_list = ['121.199.20.202']
+            host_list = ['121.199.20.211:31280','121.119.201.205:31280']
             i =  random.randrange(0, len(host_list), 1)
             host = host_list[i]
             print 'host is %s'%host
